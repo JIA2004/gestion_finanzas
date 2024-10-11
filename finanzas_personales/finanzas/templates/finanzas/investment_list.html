@@ -1,0 +1,37 @@
+{% extends 'finanzas/base.html' %}
+
+{% block content %}
+<h2>Inversiones</h2>
+<a href="{% url 'investment_create' %}" class="btn btn-success mb-3">Añadir Inversión</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Empresa</th>
+            <th>Ticker</th>
+            <th>Cantidad</th>
+            <th>Precio de Compra</th>
+            <th>Fecha de Compra</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for investment in investments %}
+            <tr>
+                <td>{{ investment.company_name }}</td>
+                <td>{{ investment.ticker }}</td>
+                <td>{{ investment.quantity }}</td>
+                <td>${{ investment.purchase_price }}</td>
+                <td>{{ investment.purchase_date }}</td>
+                <td>
+                    <a href="{% url 'investment_update' investment.pk %}" class="btn btn-primary btn-sm">Editar</a>
+                    <a href="{% url 'investment_delete' investment.pk %}" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="6">No tienes inversiones registradas.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

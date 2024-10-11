@@ -1,0 +1,11 @@
+{% extends 'finanzas/base.html' %}
+
+{% block content %}
+<h2>Eliminar Inversión</h2>
+<p>¿Estás seguro de que deseas eliminar la inversión <strong>{{ investment.company_name }} ({{ investment.ticker }})</strong>?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Confirmar</button>
+    <a href="{% url 'investment_list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

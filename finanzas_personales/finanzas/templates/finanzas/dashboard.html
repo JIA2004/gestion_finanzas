@@ -1,0 +1,61 @@
+{% extends 'finanzas/base.html' %}
+
+{% block content %}
+<h1>Dashboard</h1>
+
+<div class="row">
+    <div class="col-md-3">
+        <h3>Inversiones</h3>
+        <ul>
+            {% for investment in investments %}
+                <li>
+                    {{ investment.company_name }} ({{ investment.ticker }}):
+                    {{ investment.quantity }} acciones -
+                    Precio Actual: ${{ investment.precio_actual_display }},
+                    Valor Actual: {{ investment.valor_actual_display }},
+                    Ganancia: {{ investment.ganancia_display }}
+                </li>
+            {% empty %}
+                <li>No tienes inversiones registradas.</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'investment_create' %}" class="btn btn-primary">Añadir Inversión</a>
+    </div>
+    <div class="col-md-3">
+        <h3>Ahorros</h3>
+        <ul>
+            {% for saving in savings %}
+                <li>{{ saving.name }}: ${{ saving.amount }}</li>
+            {% empty %}
+                <li>No tienes ahorros registrados.</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'saving_create' %}" class="btn btn-primary">Añadir Ahorro</a>
+    </div>
+    <div class="col-md-3">
+        <h3>Ingresos</h3>
+        <ul>
+            {% for income in incomes %}
+                <li>{{ income.source }}: ${{ income.amount }}</li>
+            {% empty %}
+                <li>No tienes ingresos registrados.</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'income_create' %}" class="btn btn-primary">Añadir Ingreso</a>
+    </div>
+    <div class="col-md-3">
+        <h3>Gastos</h3>
+        <ul>
+            {% for expense in expenses %}
+                <li>{{ expense.category }}: ${{ expense.amount }}</li>
+            {% empty %}
+                <li>No tienes gastos registrados.</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'expense_create' %}" class="btn btn-primary">Añadir Gasto</a>
+    </div>
+</div>
+
+<!-- Opcional: Gráficos o Resúmenes Adicionales -->
+
+{% endblock %}
